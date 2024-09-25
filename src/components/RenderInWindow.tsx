@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from "react";
-import { createPortal } from "react-dom";
+import ReactDOM from "react-dom";
 import windowCloseIcon from "../assets/window-close.svg";
 import windowOpenIcon from "../assets/window-open.svg";
 import { IRenderInWindow } from "../types/index";
@@ -111,7 +111,7 @@ const RenderInWindow = ({
   }, [open, preparePopup, returnWindow]);
 
   if (open && ready && _window.current) {
-    return createPortal(
+    return ReactDOM.createPortal(
       <div className="relative">
         {showCloseWindowIcon && (
           <span
