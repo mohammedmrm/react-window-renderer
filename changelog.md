@@ -1,8 +1,16 @@
+# v1.1.0 - 25-09-2024
+
+-- allow sending window configuration parameters (ex. width, height ...);
+-- update readme.md file
+-- refactoring
+
 # v1.0.3 - 25-09-2024
-refactoring and adding more detail into README.md file 
+
+refactoring and adding more detail into README.md file
 
 # v1.0.2 - 25-09-2024
-clean code 
+
+clean code
 
 # v1.0.1 - 25-09-2024
 
