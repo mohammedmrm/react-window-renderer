@@ -77,16 +77,52 @@ export default BasicNoCssUsageExample;
 
 ## Props Table for `RenderInWindow` Component
 
-| Prop                   | Default Value | Required/Optional | Explanation                                                                                                                         |
-| ---------------------- | ------------- | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `open`                 | -             | Required          | Controls whether the window is currently open or closed. A boolean value indicating the state.                                      |
-| `setOpen`              | -             | Required          | A React state setter function used to toggle the window's open state. This function updates the `open` prop.                        |
-| `children`             | -             | Required          | The JSX Element(s) that will be rendered inside the new window. Must be provided for the component to function.                     |
-| `returnWindow`         | -             | Required          | A callback function that receives the newly opened window object, allowing further manipulation if needed.                          |
-| `hideChilderWhenClose` | `false`       | Optional          | If set to `true`, the children will be hidden when the window is closed, ensuring they are not displayed in the original component. |
-| `showOpenWindowIcon`   | `false`       | Optional          | If set to `true`, an icon will be displayed to indicate the option to open the window. Useful for improving user experience.        |
-| `showCloseWindowIcon`  | `false`       | Optional          | If set to `true`, an icon will be shown to allow the user to close the window. Enhances usability by providing a visual cue.        |
+| Prop                    | Default Value                                                | Required/Optional          | Explanation                                                                                                                                       |
+| ----------------------- | ------------------------------------------------------------ | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `open`                  | -                                                            | Required                   | Controls whether the window is currently open or closed. A boolean value indicating the state.                                                    |
+| `setOpen`               | -                                                            | Required                   | A React state setter function used to toggle the window's open state. This function updates the `open` prop.                                      |
+| `children`              | -                                                            | Required                   | The JSX Element(s) that will be rendered inside the new window. Must be provided for the component to function.                                   |
+| `returnWindow`          | -                                                            | Required                   | A callback function that receives the newly opened window object, allowing further manipulation if needed.                                        |
+| `hideChilderWhenClose`  | `false`                                                      | Optional                   | If `true`, the children will be hidden when the window is closed, ensuring they are not displayed in the original component.                      |
+| `showOpenWindowIcon`    | `false`                                                      | Optional                   | If `true`, an icon will be displayed to indicate the option to open the window. Useful for improving user experience.                             |
+| `openWindowIconConfig`  | [see `IIconConfig`](#props-table-for-iiconconfig-object)     | Optional                   | Configuration for the open window icon, allowing you to set width and height. Defaults to 30px by 30px.                                           |
+| `showCloseWindowIcon`   | `false`                                                      | Optional                   | If `true`, an icon will be shown to allow the user to close the window. Enhances usability by providing a visual cue.                             |
+| `closeWindowIconConfig` | [see `IIconConfig`](#props-table-for-iiconconfig-object)     | Optional                   | Configuration for the close window icon, allowing you to set width and height. Defaults to 30px by 30px.                                          |
+| `windowConfig`          | [see `IWindowConfig`](#props-table-for-iwindowconfig-object) | Optional                   | Configuration object for the window's properties such as width, height, position, and other window features (toolbar, menubar, etc.).             |
+| `extraHeadHTMLTags`     | -                                                            | Optional, **Experimental** | An array of JSX elements (e.g. `<style>` or `<script>`) that will be injected into the window's head section. Experimental and subject to change. |
+
+---
+
+### Props Table for `IWindowConfig` Object
+
+| Prop         | Default Value         | Required/Optional | Explanation                                                                                                          |
+| ------------ | --------------------- | ----------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `url`        | `undefined`           | Optional          | URL of the window.                                                                                                   |
+| `left`       | `0` or `screen.width` | Optional          | The distance from the left of the screen to the window. Defaults to the full screen width or 0 if `popup` is `true`. |
+| `top`        | `0`                   | Optional          | The distance from the top of the screen to the window. Defaults to 0.                                                |
+| `height`     | `screen.height`       | Optional          | The height of the window. Defaults to the full screen height.                                                        |
+| `width`      | `screen.width`        | Optional          | The width of the window. Defaults to the full screen width.                                                          |
+| `menubar`    | `"no"`                | Optional          | Enables or disables the menubar in the window.                                                                       |
+| `toolbar`    | `"no"`                | Optional          | Enables or disables the toolbar in the window.                                                                       |
+| `location`   | `"no"`                | Optional          | Enables or disables the location bar in the window.                                                                  |
+| `status`     | `"no"`                | Optional          | Enables or disables the status bar in the window.                                                                    |
+| `resizable`  | `"yes"`               | Optional          | Enables or disables the window resizing feature.                                                                     |
+| `scrollbars` | `"no"`                | Optional          | Enables or disables scrollbars in the window.                                                                        |
+| `popup`      | `true`                | Optional          | Determines if the window should be rendered as a popup. If `false`, it will render in a new tab.                     |
+
+---
+
+### Props Table for `IIconConfig` Object
+
+| Prop     | Default Value | Required/Optional | Explanation                       |
+| -------- | ------------- | ----------------- | --------------------------------- |
+| `width`  | `30`          | Optional          | The width of the icon in pixels.  |
+| `height` | `30`          | Optional          | The height of the icon in pixels. |
 
 ## License
 
 MIT
+
+## Author
+
+Mohammed Ridha. M. M.
