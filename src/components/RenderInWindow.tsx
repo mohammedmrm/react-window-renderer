@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { useCallback, useEffect, useRef, useState } from "react";
+import React from "react";
 import { createPortal } from "react-dom";
 import windowCloseIcon from "../assets/window-close.svg";
 import windowOpenIcon from "../assets/window-open.svg";
@@ -19,10 +19,10 @@ const RenderInWindow = ({
   closeWindowIconConfig,
   openWindowIconConfig,
 }: IRenderInWindow) => {
-  const _window = useRef<Window | null>(null);
-  const isExtended = useRef<boolean>();
-  const [ready, setReady] = useState(false);
-  const preparePopup = useCallback(async () => {
+  const _window = React.useRef<Window | null>(null);
+  const isExtended = React.useRef<boolean>();
+  const [ready, setReady] = React.useState(false);
+  const preparePopup = React.useCallback(async () => {
     let curWindow: Window;
 
     if (open) {
@@ -101,8 +101,8 @@ const RenderInWindow = ({
       }
       setReady(false);
     }
-  }, [open, returnWindow, setOpen]);
-  useEffect(() => {
+  }, [extraHeadHTMLTags, open, returnWindow, setOpen, windowConfig]);
+  React.useEffect(() => {
     // If open, create window and store in ref
     preparePopup();
     return () => {
