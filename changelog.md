@@ -1,3 +1,9 @@
+# v1.0.1 - 25-09-2024
+
+ -- add useage example 
+ -- add author infor 
+ -- update README.md file 
+ 
 # v1.0.0 - 25-09-2024
 
 **Initial Release**
