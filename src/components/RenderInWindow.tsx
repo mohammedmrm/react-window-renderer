@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import windowCloseIcon from "@/assets/window-close.svg";
-import windowOpenIcon from "@/assets/window-open.svg";
-import { copyStyles, createPopup } from "@/utils";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import windowCloseIcon from "../assets/window-close.svg";
+import windowOpenIcon from "../assets/window-open.svg";
 import { IRenderInWindow } from "../types/index";
+import { copyStyles, createPopup } from "../utils";
 
 const RenderInWindow = ({
   open,

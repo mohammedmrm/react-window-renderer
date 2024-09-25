@@ -1,3 +1,7 @@
+# v1.1.1 - 25-09-2024
+
+-- add morte details to readme file
+
 # v1.1.0 - 25-09-2024
 
 -- allow sending window configuration parameters (ex. width, height ...);
