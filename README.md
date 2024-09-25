@@ -8,7 +8,9 @@ Introducing a new feature in React that allows developers to render part of a co
 npm i react react-window-renderer
 ```
 
-## Example
+## Examples
+
+### example with tialwind css styling
 
 ```js
 import { RenderInWindow, useRenderInWindow } from "react-window-renderer";
@@ -44,18 +46,46 @@ const BasicUsageExample = () => {
 export default BasicUsageExample;
 ```
 
+### example with no style
+
+```js
+import React from "react";
+import { RenderInWindow, useRenderInWindow } from "react-window-renderer";
+
+const BasicNoCssUsageExample = () => {
+  const { open, setOpen, _window } = useRenderInWindow();
+
+  return (
+    <>
+      <div>React Window Renderer Basic Example</div>
+      <RenderInWindow
+        open={open}
+        setOpen={setOpen}
+        showCloseWindowIcon
+        showOpenWindowIcon
+        returnWindow={(w) => (_window.current = w)}
+        extraHeadHTMLTags={[<style ref="" />]}
+      >
+        <div>Render this content in new window</div>
+      </RenderInWindow>
+    </>
+  );
+};
+
+export default BasicNoCssUsageExample;
+```
+
 ## Props Table for `RenderInWindow` Component
 
-| Prop                   | Default Value | Required/Optional | Explanation                                                                                                                               |
-| ---------------------- | ------------- | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `open`                 | -             | Required          | Controls whether the window is currently open or closed. A boolean value indicating the state.                                            |
-| `setOpen`              | -             | Required          | A React state setter function used to toggle the window's open state. This function updates the `open` prop.                              |
-| `children`             | -             | Required          | The JSX Element(s) that will be rendered inside the new window. Must be provided for the component to function.                           |
-| `returnWindow`         | -             | Required          | A callback function that receives the newly opened window object, allowing further manipulation if needed.                                |
-| `hideChilderWhenClose` | `false`       | Optional          | If set to `true`, the children will be hidden when the window is closed, ensuring they are not displayed in the original component.       |
-| `showOpenWindowIcon`   | `false`       | Optional          | If set to `true`, an icon will be displayed to indicate the option to open the window. Useful for improving user experience.              |
-| `showCloseWindowIcon`  | `false`       | Optional          | If set to `true`, an icon will be shown to allow the user to close the window. Enhances usability by providing a visual cue.              |
-| `extentedOnly`         | `false`       | Optional          | If set to `true`, enables the window functionality only when in dual-screen extended mode. It will return the children only in this mode. |
+| Prop                   | Default Value | Required/Optional | Explanation                                                                                                                         |
+| ---------------------- | ------------- | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `open`                 | -             | Required          | Controls whether the window is currently open or closed. A boolean value indicating the state.                                      |
+| `setOpen`              | -             | Required          | A React state setter function used to toggle the window's open state. This function updates the `open` prop.                        |
+| `children`             | -             | Required          | The JSX Element(s) that will be rendered inside the new window. Must be provided for the component to function.                     |
+| `returnWindow`         | -             | Required          | A callback function that receives the newly opened window object, allowing further manipulation if needed.                          |
+| `hideChilderWhenClose` | `false`       | Optional          | If set to `true`, the children will be hidden when the window is closed, ensuring they are not displayed in the original component. |
+| `showOpenWindowIcon`   | `false`       | Optional          | If set to `true`, an icon will be displayed to indicate the option to open the window. Useful for improving user experience.        |
+| `showCloseWindowIcon`  | `false`       | Optional          | If set to `true`, an icon will be shown to allow the user to close the window. Enhances usability by providing a visual cue.        |
 
 ## License
 
