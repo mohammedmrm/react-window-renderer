@@ -1,19 +1,10 @@
-import { RenderInWindow } from "./components/RenderInWindow";
-import useRenderInWindow from "./hooks/useRenderInWindow";
+import BasicUsageExample from "./test/examples/basic";
 
 function App() {
-  const { open, setOpen, _window } = useRenderInWindow();
   return (
-    <>
-      <div>React-window-rebnderer</div>
-      <RenderInWindow
-        open={open}
-        setOpen={setOpen}
-        returnWindow={(w) => (_window.current = w)}
-      >
-        <div>Can you render me in new window</div>
-      </RenderInWindow>
-    </>
+    <div className="flex grow justify-center">
+      <BasicUsageExample />
+    </div>
   );
 }
 

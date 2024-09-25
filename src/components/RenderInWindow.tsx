@@ -4,23 +4,18 @@ import windowOpenIcon from "@/assets/window-open.svg";
 import { copyStyles, createPopup } from "@/utils";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { IRenderInWindow } from "../types/index";
 
-export const RenderInWindow = ({
+const RenderInWindow = ({
   open,
   setOpen,
   children,
   returnWindow,
-  showChildreanWhenClosed = true,
-  showToggle = true,
-}: {
-  open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  children: JSX.Element;
-  showChildreanWhenClosed?: boolean;
-  showToggle?: boolean;
-  extentedOnly?: boolean;
-  returnWindow: (w: Window | null) => void;
-}) => {
+  hideChilderWhenClose,
+  showOpenWindowIcon,
+  showCloseWindowIcon,
+  extentedOnly,
+}: IRenderInWindow) => {
   const _window = useRef<Window | null>(null);
   const isExtended = useRef<boolean>();
   const [ready, setReady] = useState(false);
@@ -105,11 +100,11 @@ export const RenderInWindow = ({
       returnWindow(_window.current);
     };
   }, [open, preparePopup, returnWindow]);
-
+  if (extentedOnly) return <>{children}</>;
   if (open && ready && _window.current)
     return createPortal(
       <div className="relative">
-        {showToggle && (
+        {showCloseWindowIcon && (
           <span
             className="absolute top-0 right-0 p-2 text-slate-200 cursor-pointer"
             onClick={() => setOpen(!open)}
@@ -127,10 +122,10 @@ export const RenderInWindow = ({
       _window.current.document.body,
       "x"
     );
-  if (showChildreanWhenClosed)
+  if (!hideChilderWhenClose)
     return (
       <div className="relative">
-        {showToggle && (
+        {showOpenWindowIcon && (
           <span
             className="absolute top-0 right-0 p-2 text-slate-200 cursor-pointer"
             onClick={() => setOpen(!open)}
@@ -148,3 +143,5 @@ export const RenderInWindow = ({
     );
   return <></>;
 };
+
+export default RenderInWindow;
