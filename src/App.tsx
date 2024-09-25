@@ -1,4 +1,4 @@
-import BasicUsageExample from "./test/examples/basic";
+import BasicUsageExample from "./tests/examples/basic";
 
 function App() {
   return (
