@@ -1,9 +1,15 @@
+# v1.0.3 - 25-09-2024
+refactoring and adding more detail into README.md file 
+
+# v1.0.2 - 25-09-2024
+clean code 
+
 # v1.0.1 - 25-09-2024
 
- -- add useage example 
- -- add author infor 
- -- update README.md file 
- 
+-- add useage example
+-- add author infor
+-- update README.md file
+
 # v1.0.0 - 25-09-2024
 
 **Initial Release**
