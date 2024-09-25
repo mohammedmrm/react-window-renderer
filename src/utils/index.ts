@@ -1,29 +1,46 @@
+import { IWindowConfig } from "@/types";
+import React from "react";
+import ReactDOM from "react-dom";
 
-export const createPopup = (
-  screenX: number,
-  screenY: number,
-  width: number,
-  height: number
-) => {
+export const createPopup = (windowConfig: IWindowConfig) => {
   const features = [
-    `left=${screenX}`,
-    `top=${screenY}`,
-    `width=${width}`,
-    `height=${height}`,
-    `menubar=no`,
-    `toolbar=no`,
-    `location=no`,
-    `status=no`,
-    `resizable=yes`,
-    `scrollbars=no`,
-    `popup`,
+    `left=${windowConfig.left || 5}`,
+    `top=${windowConfig.top || 5}`,
+    `width=${windowConfig.width || 250}`,
+    `height=${windowConfig.height || 250}`,
+    `menubar=${windowConfig.menubar || "no"}`,
+    `toolbar=${windowConfig.toolbar || "no"}`,
+    `location=${windowConfig.location || "no"}`,
+    `status=${windowConfig.status || "no"}`,
+    `resizable=${windowConfig.resizable || "yes"}`,
+    `scrollbars=${windowConfig.scrollbars || "yes"}`,
+    `${
+      windowConfig.popup == undefined || windowConfig.popup == true
+        ? "popup"
+        : "popup=false"
+    }`,
   ].join(",");
-  // TODO(crbug.com/1153004): The onPopupClose beforeunload works with about:blank popups...
-  // return window.open("about:blank", Math.random().toString(), features);
-  return window.open("", Math.random().toString(), features);
+  return window.open(
+    windowConfig.url || "",
+    Math.random().toString(),
+    features
+  );
 };
 
-export function copyStyles(src: Document, dest: Document) {
+/**
+ * Copies styles, fonts, and additional head elements from the source document to the destination document.
+ *
+ * @param src - The source document from which styles and fonts are copied.
+ * @param dest - The destination document where styles and fonts are applied.
+ * @param extraHeadHTMLTags - An array of JSX elements or HTML nodes (like <style> or <script>) to append to the head.
+ *
+ * @experimental This parameter (extraHeadHTMLTags) is experimental and may change in future releases.
+ */
+export function copyStyles(
+  src: Document,
+  dest: Document,
+  extraHeadHTMLTags?: React.ReactNode[]
+) {
   // Copy child nodes from the head of the source document to the destination
   const parentHead = window.document.querySelector("head")?.childNodes || [];
   parentHead.forEach((item) => {
@@ -43,4 +60,15 @@ export function copyStyles(src: Document, dest: Document) {
   Array.from(src.fonts).forEach((font) => {
     dest.fonts.add(font);
   });
+
+  // Append extra HTML tags (like <style> and <script>) to the destination head
+  if (extraHeadHTMLTags) {
+    extraHeadHTMLTags.forEach((tag) => {
+      if (React.isValidElement(tag)) {
+        const container = document.createElement("div");
+        ReactDOM.render(tag, container); // Render the JSX element into the container
+        dest.head.appendChild(container.firstChild!); // Append the first child of the container
+      }
+    });
+  }
 }

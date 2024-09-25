@@ -14,7 +14,10 @@ const RenderInWindow = ({
   hideChilderWhenClose,
   showOpenWindowIcon,
   showCloseWindowIcon,
-  extentedOnly,
+  extraHeadHTMLTags,
+  windowConfig,
+  closeWindowIconConfig,
+  openWindowIconConfig,
 }: IRenderInWindow) => {
   const _window = useRef<Window | null>(null);
   const isExtended = useRef<boolean>();
@@ -29,12 +32,13 @@ const RenderInWindow = ({
         //@ts-ignore
         const screenDetails = await window.getScreenDetails();
         const currentScreen = screenDetails.currentScreen;
-        _window.current = createPopup(
-          screen.width,
-          screen.height,
-          screen.width,
-          screen.height
-        );
+        _window.current = createPopup({
+          ...windowConfig,
+          left: windowConfig?.left || screen.width,
+          top: windowConfig?.top || screen.height,
+          width: windowConfig?.width || screen.width,
+          height: windowConfig?.height || screen.height,
+        });
         _window.current?.moveTo(
           currentScreen.isPrimary ? currentScreen.width : 0,
           0
@@ -44,24 +48,25 @@ const RenderInWindow = ({
         const screenDetails = await window.getScreens();
         const currentScreen = screenDetails.currentScreen;
         isExtended.current = currentScreen.isExtended;
-        _window.current = createPopup(
-          screen.width,
-          screen.height,
-          screen.width,
-          screen.height
-        );
+        _window.current = createPopup({
+          ...windowConfig,
+          left: windowConfig?.left || screen.width,
+          top: windowConfig?.top || screen.height,
+          width: windowConfig?.width || screen.width,
+          height: windowConfig?.height || screen.height,
+        });
         _window.current?.moveTo(
           currentScreen.isPrimary ? currentScreen.width * 2 : 0,
           0
         );
       } else {
-        _window.current = createPopup(
+        _window.current = createPopup({
+          ...windowConfig,
           //@ts-ignore
-          screen.left > 0 ? 0 : screen.width,
-          5,
-          screen.width,
-          screen.height
-        );
+          left: windowConfig?.left || screen.left > 0 ? 0 : screen.width,
+          width: windowConfig?.width || screen.width,
+          height: windowConfig?.height || screen.height,
+        });
         //@ts-ignore
         _window.current?.moveTo(screen.left > 0 ? 0 : screen.width, 0);
 
@@ -79,7 +84,11 @@ const RenderInWindow = ({
         };
 
         // Delay rendering until styles are ready
-        copyStyles(window.document, _window.current.document);
+        copyStyles(
+          window.document,
+          _window.current.document,
+          extraHeadHTMLTags
+        );
         await new Promise((r) => setTimeout(r, 500)); // Adjust the delay as needed
         setReady(true);
       } else {
@@ -100,8 +109,8 @@ const RenderInWindow = ({
       returnWindow(_window.current);
     };
   }, [open, preparePopup, returnWindow]);
-  if (extentedOnly) return <>{children}</>;
-  if (open && ready && _window.current)
+
+  if (open && ready && _window.current) {
     return createPortal(
       <div className="relative">
         {showCloseWindowIcon && (
@@ -112,8 +121,8 @@ const RenderInWindow = ({
             <img
               src={windowCloseIcon}
               alt="Window Open Icon"
-              width="50"
-              height="50"
+              width={closeWindowIconConfig?.width || 30}
+              height={closeWindowIconConfig?.height || 30}
             />{" "}
           </span>
         )}
@@ -122,6 +131,7 @@ const RenderInWindow = ({
       _window.current.document.body,
       "x"
     );
+  }
   if (!hideChilderWhenClose)
     return (
       <div className="relative">
@@ -133,8 +143,8 @@ const RenderInWindow = ({
             <img
               src={windowOpenIcon}
               alt="Window Open Icon"
-              width="50"
-              height="50"
+              width={openWindowIconConfig?.width || 30}
+              height={openWindowIconConfig?.height || 30}
             />
           </span>
         )}

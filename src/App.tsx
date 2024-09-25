@@ -2,7 +2,7 @@ import BasicUsageExample from "./tests/examples/basic";
 
 function App() {
   return (
-    <div className="flex grow justify-center">
+    <div className="flex flex-col grow justify-center">
       <BasicUsageExample />
     </div>
   );
