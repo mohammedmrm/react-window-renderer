@@ -9,8 +9,8 @@ export interface IRenderInWindow {
   /** The returned window object */
   returnWindow: (w: Window | null) => void;
 
-  /** To hide the childern when the window is closed @default false  */
-  hideChilderWhenClose?: boolean;
+  /** To show the childern when the window is closed @default false  */
+  showChilderWhenClose?: boolean;
 
   /** To show an icon to open the window @default false  */
   showOpenWindowIcon?: boolean;
@@ -49,7 +49,6 @@ export interface IWindowConfig {
   /** window widht @default screen.width */
   width?: number;
 
-  
   menubar?: "no" | "yes";
   toolbar?: "no" | "yes";
   location?: "no" | "yes";
