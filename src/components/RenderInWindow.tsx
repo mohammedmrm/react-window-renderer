@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import {
-  DEFAULT_WINDOW_X,
-  DEFAULT_WINDOW_Y,
-  ICON_HEIGHT,
-  ICON_WIDTH,
-  STYLE_LOADING_DELAY,
-} from "@/utils/constants";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import windowCloseIcon from "../assets/window-close.svg";
 import windowOpenIcon from "../assets/window-open.svg";
 import { IRenderInWindow } from "../types/index";
 import { copyStyles, createPopup } from "../utils";
+import {
+  DEFAULT_WINDOW_X,
+  DEFAULT_WINDOW_Y,
+  ICON_HEIGHT,
+  ICON_WIDTH,
+  STYLE_LOADING_DELAY,
+} from "../utils/constants";
 
 const RenderInWindow = ({
   open,
