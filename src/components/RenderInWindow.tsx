@@ -109,11 +109,12 @@ const RenderInWindow = ({
 
     // Cleanup on component unmount or when popup closes
     return () => {
-      closePopup();
+      if (!open) closePopup();
     };
   }, [open, preparePopup, closePopup]);
 
   // Render children inside the new window when ready
+  if (!_window.current) return <></>;
   if (open && ready && _window.current) {
     return createPortal(
       <div className="relative">
