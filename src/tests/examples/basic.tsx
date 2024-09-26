@@ -13,6 +13,7 @@ const BasicUsageExample = () => {
           open={open}
           setOpen={setOpen}
           returnWindow={(w) => (_window.current = w)}
+          showChilderWhenClose
         >
           <div className="text-green-700 text-3xl flex justify-center">
             Render this content in new window

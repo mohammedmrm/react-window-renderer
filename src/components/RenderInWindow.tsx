@@ -75,7 +75,7 @@ const RenderInWindow = ({
         _window.current = createPopup({
           ...windowConfig,
           //@ts-ignore
-          left: windowConfig?.left || screen.left > 0 ? 0 : screen.width,
+          left: windowConfig?.left || (screen.left > 0 ? 0 : screen.width),
           width: windowConfig?.width || screen.width,
           height: windowConfig?.height || screen.height,
         });
