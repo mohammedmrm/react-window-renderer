@@ -1,4 +1,3 @@
-import React from "react";
 import { RenderInWindow, useRenderInWindow } from "react-window-renderer";
 
 const BasicNoCssUsageExample = () => {

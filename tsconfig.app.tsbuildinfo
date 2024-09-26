@@ -1,0 +1,1 @@
+{"root":["./src/App.tsx","./src/index.ts","./src/main.tsx","./src/vite-env.d.ts","./src/components/RenderInWindow.tsx","./src/hooks/useRenderInWindow.ts","./src/tests/examples/basic.tsx","./src/tests/examples/basicNoCss.tsx","./src/types/index.ts","./src/utils/index.ts"],"version":"5.6.2"}

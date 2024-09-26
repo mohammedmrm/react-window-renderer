@@ -101,7 +101,7 @@ const RenderInWindow = ({
       }
       setReady(false);
     }
-  }, []);
+  }, [open]);
   React.useEffect(() => {
     // If open, create window and store in ref
     preparePopup();
