@@ -1,3 +1,7 @@
+# v1.2.1 - 26-09-2024
+
+-- update README file add Demo likes
+
 # v1.2.0 - 26-09-2024
 
 -- refactoring
