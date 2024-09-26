@@ -1,3 +1,9 @@
+# v1.2.3 - 26-09-2024
+
+-- remove tailwind and related style use & use pure css instead
+-- refactoring
+-- bug fix
+
 # v1.2.2 - 26-09-2024
 
 -- bug fixes when the passed children are dynamic components
