@@ -9,6 +9,10 @@ Introducing a new feature in React that allows developers to render part of a co
 > [!CAUTION]
 > This package is under development, you might face some buggy behaver
 
+## Support
+
+> support me to keep this work up by [buying me a coffee](https://buymeacoffee.com/m.mohammed)
+
 ## Installation
 
 ```sh
