@@ -1,3 +1,7 @@
+# v1.2.2 - 26-09-2024
+
+-- bug fixes when the passed children are dynamic components
+
 # v1.2.1 - 26-09-2024
 
 -- update README file add Demo likes
