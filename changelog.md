@@ -1,3 +1,7 @@
+# v1.2.4 - 26-09-2024
+
+-- fix importing constants file
+
 # v1.2.3 - 26-09-2024
 
 -- remove tailwind and related style use & use pure css instead
