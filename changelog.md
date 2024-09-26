@@ -1,3 +1,8 @@
+# v1.2.0 - 26-09-2024
+
+-- refactoring
+-- change `hideChilderWhenClose` to `showChilderWhenClose`
+
 # v1.1.1 - 25-09-2024
 
 -- add morte details to readme file
