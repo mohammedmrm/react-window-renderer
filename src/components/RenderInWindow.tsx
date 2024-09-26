@@ -1,4 +1,11 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
+import {
+  DEFAULT_WINDOW_X,
+  DEFAULT_WINDOW_Y,
+  ICON_HEIGHT,
+  ICON_WIDTH,
+  STYLE_LOADING_DELAY,
+} from "@/utils/constants";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import windowCloseIcon from "../assets/window-close.svg";
@@ -37,6 +44,7 @@ const RenderInWindow = ({
     try {
       let currentScreen;
       // Handle Chrome's window management API if available
+      // read here https://developer.chrome.com/docs/capabilities/web-apis/window-management
       if ("getScreenDetails" in window) {
         // For `getScreenDetails` (Chrome-specific)
         //@ts-ignore
@@ -50,7 +58,7 @@ const RenderInWindow = ({
           height: windowConfig?.height || screen.height,
         });
         _window.current?.moveTo(
-          currentScreen.isPrimary ? currentScreen.width : 0,
+          currentScreen.isPrimary ? currentScreen.width : DEFAULT_WINDOW_X,
           0
         );
       } else if ("getScreens" in window) {
@@ -67,8 +75,8 @@ const RenderInWindow = ({
           height: windowConfig?.height || screen.height,
         });
         _window.current?.moveTo(
-          currentScreen.isPrimary ? currentScreen.width * 2 : 0,
-          0
+          currentScreen.isPrimary ? currentScreen.width * 2 : DEFAULT_WINDOW_X,
+          DEFAULT_WINDOW_Y
         );
       } else {
         // Fallback logic if no window management API is available
@@ -79,8 +87,12 @@ const RenderInWindow = ({
           width: windowConfig?.width || screen.width,
           height: windowConfig?.height || screen.height,
         });
-        //@ts-ignore
-        _window.current?.moveTo(screen.left > 0 ? 0 : screen.width, 0);
+
+        _window.current?.moveTo(
+          //@ts-ignore
+          screen.left > 0 ? 0 : screen.width,
+          DEFAULT_WINDOW_Y
+        );
       }
 
       if (_window.current) {
@@ -92,7 +104,9 @@ const RenderInWindow = ({
 
         copyStyles(document, _window.current.document, extraHeadHTMLTags);
 
-        await new Promise((resolve) => setTimeout(resolve, 300)); // Small delay to ensure styles are applied
+        await new Promise((resolve) =>
+          setTimeout(resolve, STYLE_LOADING_DELAY)
+        ); // Small delay to ensure styles are applied
         setReady(true);
       }
     } catch (error) {
@@ -106,7 +120,6 @@ const RenderInWindow = ({
     } else {
       closePopup();
     }
-
     // Cleanup on component unmount or when popup closes
     return () => {
       if (!open) closePopup();
@@ -114,22 +127,21 @@ const RenderInWindow = ({
   }, [open, preparePopup, closePopup]);
 
   // Render children inside the new window when ready
-  if (!_window.current) return <></>;
   if (open && ready && _window.current) {
     return createPortal(
-      <div className="relative">
+      <div style={{ display: "grid", width: "100%", flexFlow: "column" }}>
         {showCloseWindowIcon && (
-          <span
-            className="absolute top-0 right-0 p-2 cursor-pointer"
+          <div
+            style={{ display: "flex", justifySelf: "end", cursor: "pointer" }}
             onClick={() => setOpen(false)}
           >
             <img
               src={windowCloseIcon}
               alt="Close"
-              width={closeWindowIconConfig?.width || 30}
-              height={closeWindowIconConfig?.height || 30}
+              width={closeWindowIconConfig?.width || ICON_WIDTH}
+              height={closeWindowIconConfig?.height || ICON_HEIGHT}
             />
-          </span>
+          </div>
         )}
         {children}
       </div>,
@@ -140,17 +152,17 @@ const RenderInWindow = ({
   // Return the children inside the main window when not hiding them on close
   if (showChilderWhenClose) {
     return (
-      <div className="relative">
+      <div style={{ display: "grid", width: "100%", flexFlow: "column" }}>
         {showOpenWindowIcon && (
           <span
-            className="absolute top-0 right-0 p-2 cursor-pointer"
             onClick={() => setOpen(true)}
+            style={{ display: "flex", justifySelf: "end", cursor: "pointer" }}
           >
             <img
               src={windowOpenIcon}
               alt="Open"
-              width={openWindowIconConfig?.width || 30}
-              height={openWindowIconConfig?.height || 30}
+              width={openWindowIconConfig?.width || ICON_WIDTH}
+              height={openWindowIconConfig?.height || ICON_HEIGHT}
             />
           </span>
         )}
@@ -158,8 +170,6 @@ const RenderInWindow = ({
       </div>
     );
   }
-
-  // If the children should be hidden when the popup is closed
   return null;
 };
 

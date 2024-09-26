@@ -34,8 +34,11 @@ export interface IRenderInWindow {
 }
 
 export interface IWindowConfig {
-  /** URL of the window @default undifiend  */
+  /** URL of the window @default undefined  */
   url?: string | URL;
+
+  /** Title of the window @default undefined  */
+  windowName?: string;
 
   /**  Distance from left  @default screen.width or 0 */
   left?: number;

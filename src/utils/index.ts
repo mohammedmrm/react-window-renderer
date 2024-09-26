@@ -22,7 +22,7 @@ export const createPopup = (windowConfig: IWindowConfig) => {
   ].join(",");
   return window.open(
     windowConfig.url || "",
-    Math.random().toString(),
+    windowConfig.windowName  || Math.random().toString(),
     features
   );
 };
