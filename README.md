@@ -7,11 +7,9 @@ Introducing a new feature in React that allows developers to render part of a co
 [Demo preview](https://fy9mc5.csb.app/)
 
 > [!CAUTION]
-> This package is under development, you might face some buggy behaver
+> This package is under development, you might face some buggy behavior
 
-## Support
-
-> support me to keep this work up by [buying me a coffee](https://buymeacoffee.com/m.mohammed)
+> support me to keep this work up by [buy me a coffee](https://buymeacoffee.com/m.mohammed)
 
 ## Installation
 
@@ -49,7 +47,7 @@ const BasicUsageExample = () => {
 export default BasicUsageExample;
 ```
 
-### example with enable open/close icons
+### example with enabled open/close icons
 
 ```js
 import { RenderInWindow, useRenderInWindow } from "react-window-renderer";
