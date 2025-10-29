@@ -1,4 +1,4 @@
-import { RenderInWindow, useRenderInWindow } from "react-window-renderer";
+import { RenderInWindow, useRenderInWindow } from "../../index";
 
 const BasicNoCssUsageExample = () => {
   const { open, setOpen, _window } = useRenderInWindow();
@@ -10,7 +10,7 @@ const BasicNoCssUsageExample = () => {
       showCloseWindowIcon
       showOpenWindowIcon
       showChilderWhenClose
-      returnWindow={(w) => (_window.current = w)}
+      returnWindow={(w: Window | null) => (_window.current = w)}
       extraHeadHTMLTags={[<style ref="" />]}
     >
       <div>Render this content in new window</div>

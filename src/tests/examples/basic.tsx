@@ -1,4 +1,4 @@
-import { RenderInWindow, useRenderInWindow } from "react-window-renderer";
+import { RenderInWindow, useRenderInWindow } from "../../index";
 
 const BasicUsageExample = () => {
   const { open, setOpen, _window } = useRenderInWindow();
@@ -8,7 +8,7 @@ const BasicUsageExample = () => {
       <RenderInWindow
         open={open}
         setOpen={setOpen}
-        returnWindow={(w) => (_window.current = w)}
+        returnWindow={(w: Window | null) => (_window.current = w)}
       >
         <div>Render this content in new window</div>
       </RenderInWindow>
