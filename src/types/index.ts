@@ -9,7 +9,7 @@ export interface IRenderInWindow {
   /** The returned window object */
   returnWindow: (w: Window | null) => void;
 
-  /** To show the childern when the window is closed @default false  */
+  /** To show the children when the window is closed @default false  */
   showChilderWhenClose?: boolean;
 
   /** To show an icon to open the window @default false  */
@@ -24,7 +24,7 @@ export interface IRenderInWindow {
   /** set icon width and height @default 30px 30xp */
   closeWindowIconConfig?: IIconConfig;
 
-  /** configration for the window props (ex. widht height ....) */
+  /** configuration for the window props (ex. width height ....) */
   windowConfig?: IWindowConfig;
 
   /** To included any other needed css/js files for third-party libs
@@ -49,7 +49,7 @@ export interface IWindowConfig {
   /** window height @default screen.height */
   height?: number;
 
-  /** window widht @default screen.width */
+  /** window width @default screen.width */
   width?: number;
 
   menubar?: "no" | "yes";

@@ -1,6 +1,7 @@
 import { IWindowConfig } from "@/types";
 import React from "react";
-import ReactDOM from "react-dom";
+import { flushSync } from "react-dom";
+import * as ReactDOM from "react-dom/client";
 
 export const createPopup = (windowConfig: IWindowConfig) => {
   const features = [
@@ -15,7 +16,7 @@ export const createPopup = (windowConfig: IWindowConfig) => {
     `resizable=${windowConfig.resizable || "yes"}`,
     `scrollbars=${windowConfig.scrollbars || "yes"}`,
     `${
-      windowConfig.popup == undefined || windowConfig.popup == true
+      windowConfig.popup === undefined || windowConfig.popup === true
         ? "popup"
         : "popup=false"
     }`,
@@ -66,8 +67,14 @@ export function copyStyles(
     extraHeadHTMLTags.forEach((tag) => {
       if (React.isValidElement(tag)) {
         const container = document.createElement("div");
-        ReactDOM.render(tag, container); // Render the JSX element into the container
-        dest.head.appendChild(container.firstChild!); // Append the first child of the container
+        const root = ReactDOM.createRoot(container);
+        flushSync(() => {
+          root.render(tag); // Render the JSX element into the container
+        });
+        if (container.firstChild) {
+          dest.head.appendChild(container.firstChild); // Append the first child of the container
+        }
+        root.unmount(); // Clean up the root
       }
     });
   }
